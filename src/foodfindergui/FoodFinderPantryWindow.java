@@ -126,7 +126,8 @@ public class FoodFinderPantryWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_stockButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        new AddWindow().setVisible(true);
+       addWin = new AddWindow();
+       addWin.setVisible(true);
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
@@ -169,12 +170,17 @@ public class FoodFinderPantryWindow extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FoodFinderPantryWindow().setVisible(true);
+                
+                if(addWin.newIngredient() == true){
+                	
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
+    private static AddWindow addWin;
     private javax.swing.JButton backButton;
     private javax.swing.JTable ingrTable;
     private javax.swing.JScrollPane jScrollPane2;

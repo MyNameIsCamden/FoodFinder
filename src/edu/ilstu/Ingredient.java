@@ -8,6 +8,7 @@ package edu.ilstu;
 	{
 		private String ingredientName;
 		private double amount;
+		private String homeUnit;
 	 	private Conversion conversionRatio;
 	 	
 	 	public Ingredient()
@@ -16,6 +17,13 @@ package edu.ilstu;
 			this.amount = 0;
 			this.conversionRatio = new Conversion(1, null, null, null);
 		}
+	 	
+	 	public Ingredient(String ingredientName, double amount, String homeUnit)
+	 	{
+	 		this.ingredientName = ingredientName;
+	 		this.amount = amount;
+	 		this.homeUnit = homeUnit;
+	 	}
 	 	
 	 	public Ingredient(String ingredientName,
 				String commercialUnit, String homeUnit, double commercialAmount, double conversionRate)
@@ -27,39 +35,49 @@ package edu.ilstu;
 		
 		public void increaseAmount(double addedAmount)
 		{
-			this.amount += addedAmount;
+			amount += addedAmount;
 		}
 		public void decreaseAmount(double addedAmount)
 		{
-			this.amount -= addedAmount;
+			amount -= addedAmount;
 		}	
 		
 		public double getAmount()
 		{
-			return this.amount;
+			return amount;
+		}
+		
+		public String getHomeUnit()
+		{
+			return homeUnit;
 		}
 		
 		public String getName()
 		{
-			return this.ingredientName;
+			return ingredientName;
 		}
 		
 		public void setAmount(double amountIn)
 		{
-			this.amount = amountIn;
+			amount = amountIn;
 		}
 		
 		public void setName(String nameIn)
 		{
-			this.ingredientName = nameIn;
+			ingredientName = nameIn;
 		}
 
 		public boolean equals(Ingredient ing) {
 			boolean result = false;
 		    if (ing == null) result = false;
 		    else 
-		    	if (ing.getName().equals(this.getName()))
+		    	if (ing.getName().equals(getName()))
 		    		result = true;
 		    return result;
-		}	
+		}
+		
+		public String toString()
+		{
+			return ingredientName + ", " + amount;
+		}
 }

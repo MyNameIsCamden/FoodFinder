@@ -10,19 +10,51 @@ import java.util.List;
  * @author Heather Trausch
  *
  */
-public class Recipe {
-	
+public class Recipe
+{
+	private String name;
 	private String instructions;
 	private int rating;
-	private List<Ingredient> ingredients = new ArrayList<Ingredient>();
-	private List<User> users = new ArrayList<User>();
-	private List<Tags> tags = new ArrayList<Tags>();
+	private List<Ingredient> ingredients;
+	private List<User> users;
+	private List<Tags> tags;
+	
+	public Recipe()
+	{
+		ingredients = new ArrayList<Ingredient>();
+		users = new ArrayList<User>();
+		tags = new ArrayList<Tags>();
+	}
+	
+	public Recipe(String name)
+	{
+		ingredients = new ArrayList<Ingredient>();
+		users = new ArrayList<User>();
+		tags = new ArrayList<Tags>();
+		this.name = name;
+	}
+	
+	public void addIngredient(Ingredient ing)
+	{
+		ingredients.add(ing);
+	}
 	
 	/**
 	 * This method returns the instructions in String format.
 	 * 
 	 * @return the instructions
 	 */
+	
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+	
+	public String getName()
+	{
+		return name;
+	}
+	
 	public String displayInstructions(){
 		return instructions;
 	}
@@ -126,4 +158,8 @@ public class Recipe {
 		return tags;
 	}
 	
+	public String toString()
+	{
+		return name;
+	}
 }

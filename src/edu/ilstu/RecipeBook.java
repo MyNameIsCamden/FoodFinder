@@ -7,13 +7,18 @@ public class RecipeBook
 	
 	private ArrayList<Recipe> recipeList;
 	
-	RecipeBook(Recipe r)
+	public RecipeBook(Recipe r)
 	{
 		recipeList = new ArrayList<Recipe>();
 		recipeList.add(r);
 	}
 	
-	RecipeBook()
+	public RecipeBook(ArrayList<Recipe> recipeList)
+	{
+		this.recipeList = recipeList;
+	}
+	
+	public RecipeBook()
 	{
 		recipeList = new ArrayList<Recipe>();
 	}
@@ -21,6 +26,11 @@ public class RecipeBook
 	public void addRecipe(Recipe newRecipe)
 	{
 		recipeList.add(newRecipe);
+	}
+	
+	public ArrayList<Recipe> getList()
+	{
+		return recipeList;
 	}
 	
 	public void deleteRecipe(Recipe oldRecipe)
@@ -47,6 +57,10 @@ public class RecipeBook
 	public void displayAllRecipes()
 	{
 		//Need UI info
+	}
+
+	public boolean isEmpty() {
+		return recipeList.isEmpty();
 	}
 	
 }
