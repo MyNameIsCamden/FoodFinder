@@ -5,6 +5,10 @@
  */
 package foodfindergui;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  *
  * @author Katie
@@ -205,7 +209,13 @@ public class AddRWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_removeIngrButtonActionPerformed
 
     private void tagFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tagFieldActionPerformed
-        // TODO add your handling code here:
+    	 List<Tags> tags = new ArrayList<Tags>();
+    	 List<String> separatedList = new ArrayList<String>(Arrays.asList(evt.split(",")));
+    	 for(int i = 0; i < separatedList.size(); i++){
+    	 
+    		 tags[i] = new Tags(separatedList[i]);
+    	 }
+   	
     }//GEN-LAST:event_tagFieldActionPerformed
 
     private void addIngrButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addIngrButton1ActionPerformed
