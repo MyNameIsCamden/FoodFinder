@@ -1,10 +1,15 @@
-package foodfindergui;
+package edu.ilstu;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.awt.Component;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Katie
@@ -18,6 +23,12 @@ public class FoodFinderPantryWindow extends javax.swing.JFrame {
         initComponents();
     }
 
+    Pantry myPantry = Pantry.getInstance();
+    ArrayList <Ingredient> ingrList = myPantry.listIngredients();
+    String[] columnNames = {"Ingredient Name", "Amount"};
+    DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+ // add rows from arraylist to jtable
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,12 +42,21 @@ public class FoodFinderPantryWindow extends javax.swing.JFrame {
         removeButton = new javax.swing.JButton();
         stockButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        ingrTable = new javax.swing.JTable();
+        ingrTable = new javax.swing.JTable(tableModel);
         backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PANTRY");
 
+        
+        
+        for (int i = 0; i < ingrList.size(); i++)
+        {
+        	String ingrName = ingrList.get(i).getName();
+        	String ingrAmount = ingrList.get(i).getAmount() + ingrList.get(i).getConversion().returnHomeUnit();
+        	Object [] data = {ingrName,ingrAmount};
+        	tableModel.addRow(data);
+        }
         addButton.setText("Add Ingredient");
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,18 +79,8 @@ public class FoodFinderPantryWindow extends javax.swing.JFrame {
                 stockButtonActionPerformed(evt);
             }
         });
+ 
 
-        ingrTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Ingredient Name", "Current Amount"
-            }
-        ));
         jScrollPane2.setViewportView(ingrTable);
 
         backButton.setText("Go Back");
@@ -181,4 +191,3 @@ public class FoodFinderPantryWindow extends javax.swing.JFrame {
     private javax.swing.JButton removeButton;
     private javax.swing.JButton stockButton;
     // End of variables declaration//GEN-END:variables
-}
