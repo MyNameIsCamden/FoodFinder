@@ -15,10 +15,17 @@ import java.util.ArrayList;
  */
 public class Pantry {
 	
-	ArrayList<Ingredient> ingredientList;
+	private static Pantry obj;
+	private ArrayList<Ingredient> ingredientList;
 	
-	Pantry(){
+	private Pantry(){
 		ingredientList = new ArrayList<Ingredient>();
+	}
+	
+	public static Pantry getInstance()
+	{ if (obj == null)
+		{obj = new Pantry();}
+	return obj;
 	}
 	
 	public void addIngredient(Ingredient ing){
