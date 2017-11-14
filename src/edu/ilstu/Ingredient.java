@@ -39,6 +39,11 @@ package edu.ilstu;
 			return this.amount;
 		}
 		
+		public Conversion getConversion()
+		{
+			return this.conversionRatio;
+		}
+		
 		public String getName()
 		{
 			return this.ingredientName;
