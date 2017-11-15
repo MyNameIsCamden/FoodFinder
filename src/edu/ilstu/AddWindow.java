@@ -183,3 +183,5 @@ public class AddWindow extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     //private Ingredient newIngr;
+
+}
