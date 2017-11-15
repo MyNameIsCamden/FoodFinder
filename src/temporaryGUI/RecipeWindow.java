@@ -44,7 +44,6 @@ public class RecipeWindow extends JPanel implements ActionListener
 		add(goBackButton);
 		add(new JLabel("Recipe list"));
 		add(list);
-		main(null);
 	}
 	
 	public RecipeWindow(RecipeBook book)
