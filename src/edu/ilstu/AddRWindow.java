@@ -7,7 +7,7 @@ package edu.ilstu;
 
 /**
  *
- * @author Katie
+ * @author Katie, Heather
  */
 public class AddRWindow extends javax.swing.JFrame {
 
