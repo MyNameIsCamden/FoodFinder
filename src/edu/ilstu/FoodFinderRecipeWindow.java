@@ -8,7 +8,7 @@ package edu.ilstu;
 
 /**
  *
- * @author Katie
+ * @author Katie, Heather
  */
 public class FoodFinderRecipeWindow extends javax.swing.JFrame {
 
