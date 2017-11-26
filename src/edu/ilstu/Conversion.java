@@ -11,6 +11,7 @@ public class Conversion {
 		this.conversionRate = conversionRate;
 		this.commercialUnit = commercialUnit; 
 		this.ingredientName = ingredientName;
+		this.homeUnit =homeUnit;
 	}
 	
 	public double convert(double input){
