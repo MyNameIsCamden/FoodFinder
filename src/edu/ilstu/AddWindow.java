@@ -1,6 +1,9 @@
 package edu.ilstu;
 
 /*
+ package edu.ilstu;
+
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -65,7 +68,12 @@ public class AddWindow extends javax.swing.JFrame {
         });
 
         homeUnitField.setText("Home Units (What units you want ingredient to be kept track in)");
-
+        homeUnitField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                homeUnitFieldActionPerformed(evt);
+            }
+        });
+        
         comUnitField.setText("Commerical Units (What units are used on the package)");
         comUnitField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,9 +128,14 @@ public class AddWindow extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         this.dispose();
+        new FoodFinderPantryWindow().setVisible(true);    
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void comUnitFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comUnitFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comUnitFieldActionPerformed
+
+    private void homeUnitFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comUnitFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comUnitFieldActionPerformed
 
@@ -132,8 +145,8 @@ public class AddWindow extends javax.swing.JFrame {
        Ingredient newIngredient = new Ingredient(nameField.getText(), comUnitField.getText(), homeUnitField.getText(), 
     		   Double.parseDouble(amountField.getText()), Double.parseDouble(convField.getText()));
 		myPantry.addIngredient(newIngredient);		
-        
         this.dispose();
+        new FoodFinderPantryWindow().setVisible(true);
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     /**
