@@ -10,11 +10,17 @@ package edu.ilstu;
  * @author Katie
  */
 public class cStockWindow extends javax.swing.JFrame {
-
+	
+private boolean addIndicator = false;
+private boolean deleteIndicator = false;
+private double amountChange = 0.0;
+private Ingredient tempIngredient = null;
+	
     /**
      * Creates new form cStockWindow
      */
-    public cStockWindow() {
+    public cStockWindow(Ingredient tempIng) {
+    	this.tempIngredient = tempIng;
         initComponents();
     }
 
@@ -38,7 +44,17 @@ public class cStockWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        amountField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                amountFieldActionPerformed(evt);
+            }
+        });
         confirmButton.setText("Confirm");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmButtonActionPerformed(evt);
+            }
+        });
 
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -139,16 +155,34 @@ public class cStockWindow extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         this.dispose();
+        new FoodFinderPantryWindow().setVisible(true); 
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
+        addIndicator = true;
+        deleteIndicator = false;
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
+        addIndicator = false;
+        deleteIndicator = true;
     }//GEN-LAST:event_jRadioButton2ActionPerformed
+    
+    private void amountFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amountFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_amountFieldActionPerformed
+    
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    	this.amountChange = Double.parseDouble(amountField.getText());
+        if(addIndicator && this.amountChange != 0.0 && this.tempIngredient != null)
+        	this.tempIngredient.increaseAmount(amountChange);
+        if(deleteIndicator && this.amountChange != 0.0 && this.tempIngredient != null)
+        	this.tempIngredient.decreaseAmount(amountChange);
+        this.dispose();
+        new FoodFinderPantryWindow().setVisible(true); 
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */
@@ -179,7 +213,7 @@ public class cStockWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new cStockWindow().setVisible(true);
+                new cStockWindow(null).setVisible(true);
             }
         });
     }
