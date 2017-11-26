@@ -59,12 +59,17 @@ package edu.ilstu;
 			this.ingredientName = nameIn;
 		}
 
-		public boolean equals(Ingredient ing) {
+		@Override
+		public boolean equals(Object ing){
 			boolean result = false;
+			
 		    if (ing == null) result = false;
 		    else 
-		    	if (ing.getName().equals(this.getName()))
+		    	{ 
+		    	Ingredient tempIng = (Ingredient)ing;
+		    	if (tempIng.getName().equals(this.getName()))
 		    		result = true;
+		    	}
 		    return result;
 		}	
 }
