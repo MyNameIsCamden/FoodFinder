@@ -10,12 +10,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 /**
  *
  * @author Katie
  */
 public class FoodFinderPantryWindow extends javax.swing.JFrame {
 
+	private String ingrLabel = "";
     /**
      * Creates new form FoodFinderPantryWindow
      */
@@ -53,7 +58,7 @@ public class FoodFinderPantryWindow extends javax.swing.JFrame {
         for (int i = 0; i < ingrList.size(); i++)
         {
         	String ingrName = ingrList.get(i).getName();
-        	String ingrAmount = ingrList.get(i).getAmount() + ingrList.get(i).getConversion().returnHomeUnit();
+        	String ingrAmount = ingrList.get(i).getAmount() + " " + ingrList.get(i).getConversion().returnHomeUnit();
         	Object [] data = {ingrName,ingrAmount};
         	tableModel.addRow(data);
         }
@@ -61,6 +66,13 @@ public class FoodFinderPantryWindow extends javax.swing.JFrame {
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addButtonActionPerformed(evt);
+            }
+        });
+        ingrTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            public void valueChanged(ListSelectionEvent event) {
+                // do some actions here, for example
+                // print first column value from selected row
+               ingrLabel = ingrTable.getValueAt(ingrTable.getSelectedRow(), 0).toString();
             }
         });
 
@@ -131,16 +143,32 @@ public class FoodFinderPantryWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void stockButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stockButtonActionPerformed
-        new cStockWindow().setVisible(true);
+    private void stockButtonActionPerformed(java.awt.event.ActionEvent evt) 
+    {//GEN-FIRST:event_stockButtonActionPerformed
+    	if (ingrLabel !="")
+    	{
+            Pantry myPantry = Pantry.getInstance();
+            Ingredient tempIng = new Ingredient(ingrLabel, null, null, 0, 0);
+            Ingredient tempIngr2 = myPantry.findIngredient(tempIng);	
+        new cStockWindow(tempIngr2).setVisible(true);
+        this.dispose();
+    	}
     }//GEN-LAST:event_stockButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         new AddWindow().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
-        // TODO add your handling code here:
+        if (ingrLabel != "")
+        {
+            Pantry myPantry = Pantry.getInstance();
+            Ingredient tempIng = new Ingredient(ingrLabel, null, null, 0, 0);
+            myPantry.deleteIngredient(tempIng);
+            this.dispose();
+            new FoodFinderPantryWindow().setVisible(true);
+        }
     }//GEN-LAST:event_removeButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
