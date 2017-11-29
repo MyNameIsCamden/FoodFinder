@@ -12,11 +12,22 @@ import java.util.List;
  */
 public class Recipe {
 	
+	private String name;
 	private String instructions;
 	private int rating;
-	private List<Ingredient> ingredients = new ArrayList<Ingredient>();
-	private List<User> users = new ArrayList<User>();
-	private List<Tags> tags = new ArrayList<Tags>();
+	private ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+	private ArrayList<User> users = new ArrayList<User>();
+	private ArrayList<Tags> tags = new ArrayList<Tags>();
+	
+ 	public Recipe()
+	{
+		this.name = "";
+	}
+	
+	public Recipe(String Name)
+	{
+		this.name = Name;
+	}
 	
 	/**
 	 * This method returns the instructions in String format.
@@ -90,8 +101,16 @@ public class Recipe {
 		this.instructions = instructions;
 	}
 	
+	public void setName(String name){
+		this.name = name;
+	}
+	
 	public String getInstructions(){
-		return instructions;
+		return this.instructions;
+	}
+	
+	public String getName(){
+		return this.name;
 	}
 	
 	public void setRating(int rating){
@@ -102,15 +121,19 @@ public class Recipe {
 		return rating;
 	}
 	
-	public void setIngredients(List<Ingredient> ingredients){
+	public void setIngredients(ArrayList<Ingredient> ingredients){
 		this.ingredients = ingredients;
 	}
 	
-	public List<Ingredient> getIngredients(){
+	public void addIngredient(Ingredient newIngredient){
+		this.ingredients.add(newIngredient);
+	}
+	
+	public ArrayList<Ingredient> getIngredients(){
 		return ingredients;
 	}
 	
-	public void setUsers(List<User> users){
+	public void setUsers(ArrayList<User> users){
 		this.users = users;
 	}
 	
@@ -118,12 +141,37 @@ public class Recipe {
 		return users;
 	}
 	
-	public void setTags(List<Tags> tags){
+	public void setTags(ArrayList<Tags> tags){
 		this.tags = tags;
 	}
 	
 	public List<Tags> getTags(){
 		return tags;
 	}
+	
+	public void makeRecipe()
+	{
+		Pantry myPantry = Pantry.getInstance();
+		for(int i = 0; i < this.ingredients.size(); i++){
+			Ingredient ing = this.ingredients.get(i);
+			Ingredient ing2 = myPantry.findIngredient(ing);
+			double amountDeduct = ing.getAmount();
+			if (ing2 != null)
+				ing2.decreaseAmount(amountDeduct);
+		}	
+	}
+	@Override
+	public boolean equals(Object rec){
+		boolean result = false;
+		
+	    if (rec == null) result = false;
+	    else 
+	    	{ 
+	    	Recipe tempRec = (Recipe)rec;
+	    	if (tempRec.getName().equals(this.getName()))
+	    		result = true;
+	    	}
+	    return result;
+	}	
 	
 }
