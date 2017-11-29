@@ -48,7 +48,7 @@ private String recName = "";
         if(tempRecipe != null)
         {
           instrTextPane.setText(tempRecipe.displayInstructions());
-          instrTextPane.setText(tempRecipe.displayInstructions());
+          ingrTextPane.setText(tempRecipe.displayIngredients());
         }
         closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
