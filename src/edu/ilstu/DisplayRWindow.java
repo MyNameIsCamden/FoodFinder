@@ -13,11 +13,13 @@ package edu.ilstu;
 import javax.swing.JOptionPane;
 
 public class DisplayRWindow extends javax.swing.JFrame {
-
+private Recipe tempRecipe = null;
+private String recName = "";
     /**
      * Creates new form DisplayRWindow
      */
-    public DisplayRWindow() {
+    public DisplayRWindow(Recipe inRecipe) {
+    	this.tempRecipe = inRecipe;
         initComponents();
     }
 
@@ -29,7 +31,8 @@ public class DisplayRWindow extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
+    	if (tempRecipe != null)
+    		recName = tempRecipe.getName();
         closeButton = new javax.swing.JButton();
         ingrPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -40,8 +43,13 @@ public class DisplayRWindow extends javax.swing.JFrame {
         recMadeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
+        setTitle(recName);
         closeButton.setText("Close");
+        if(tempRecipe != null)
+        {
+          instrTextPane.setText(tempRecipe.displayInstructions());
+          instrTextPane.setText(tempRecipe.displayInstructions());
+        }
         closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 closeButtonActionPerformed(evt);
@@ -125,16 +133,17 @@ public class DisplayRWindow extends javax.swing.JFrame {
 
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         this.dispose();
+        new FoodFinderRecipeWindow().setVisible(true);
     }//GEN-LAST:event_closeButtonActionPerformed
 
     private void recMadeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recMadeButtonActionPerformed
         
         //code for removeing ingrs from pantry
-        
+    	tempRecipe.makeRecipe();
         JOptionPane.showMessageDialog(null, "Ingredients from pantry removed for recipe. " + "Check your pantry for the updated amounts" ,"Recipe Made", JOptionPane.INFORMATION_MESSAGE);
         
         this.dispose(); 
-        
+        new FoodFinderRecipeWindow().setVisible(true);
     }//GEN-LAST:event_recMadeButtonActionPerformed
 
     /**
@@ -167,7 +176,7 @@ public class DisplayRWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DisplayRWindow().setVisible(true);
+                new DisplayRWindow(null).setVisible(true);
             }
         });
     }
