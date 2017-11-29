@@ -1,4 +1,5 @@
 /*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -10,11 +11,12 @@ package edu.ilstu;
  * @author Katie
  */
 public class AddRIngredientWindow extends javax.swing.JFrame {
-
+	private Recipe tempRecipe;
     /**
      * Creates new form AddRIngredientWindow
      */
-    public AddRIngredientWindow() {
+    public AddRIngredientWindow(Recipe inRecipe) {
+    	this.tempRecipe = inRecipe;
         initComponents();
     }
 
@@ -165,13 +167,15 @@ public class AddRIngredientWindow extends javax.swing.JFrame {
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         
-        //code code code code code
-        
+        Ingredient tempIngr = new Ingredient(jTextField1.getText(), null, jTextField2.getText(), Double.parseDouble(jTextField3.getText()),1.0);
+        tempRecipe.addIngredient(tempIngr);
         this.dispose();
+        new AddRWindow(this.tempRecipe).setVisible(true);
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         this.dispose();
+        new AddRWindow(this.tempRecipe).setVisible(true);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**
@@ -204,7 +208,7 @@ public class AddRIngredientWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddRIngredientWindow().setVisible(true);
+                new AddRIngredientWindow(null).setVisible(true);
             }
         });
     }
