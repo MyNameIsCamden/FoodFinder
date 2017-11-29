@@ -38,6 +38,14 @@ public class RecipeBook
 	{
 		recipeList.remove(oldRecipe);
 	}
+	
+	public Recipe findRecipe (Recipe rec){
+		Recipe tempRec = null;
+		if (recipeList.contains(rec)) {
+			   tempRec = recipeList.get(recipeList.indexOf(rec));
+			}
+		return tempRec;
+	}
 
 	public void sort()
 	{
