@@ -57,9 +57,8 @@ public class Recipe {
 		
 		for(int i = 0; i < this.ingredients.size(); i++){
 			Ingredient ing = this.ingredients.get(i);
-			listOfIng = listOfIng + ing.getName() + "\n";
+			listOfIng = listOfIng + ing.getAmount() + " " + ing.getConversion().returnHomeUnit() + " " + ing.getName() + "\n";
 		}	
-		
 		return listOfIng;
 	}
 	
@@ -137,7 +136,7 @@ public class Recipe {
 		this.users = users;
 	}
 	
-	public List<User> getUser(){
+	public ArrayList<User> getUser(){
 		return users;
 	}
 	
