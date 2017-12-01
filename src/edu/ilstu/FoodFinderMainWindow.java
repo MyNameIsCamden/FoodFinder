@@ -78,7 +78,7 @@ public class FoodFinderMainWindow extends javax.swing.JFrame {
 
     private void recipeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recipeButtonActionPerformed
         this.dispose();
-        new FoodFinderRecipeWindow().setVisible(true);
+        new FoodFinderRecipeWindow(null).setVisible(true);
     }//GEN-LAST:event_recipeButtonActionPerformed
   
     /**
