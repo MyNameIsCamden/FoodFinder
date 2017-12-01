@@ -1,20 +1,39 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
+* To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package edu.ilstu;
 
+import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
+
+
 /**
  *
- * @author Katie
+ * @author Katie, Heather
  */
 public class AddRWindow extends javax.swing.JFrame {
 
+	private Recipe newRecipe;
+	private String RecipeName = " ";
+	private ArrayList<Tags> tempListTags = null;;
+	private ArrayList<User> tempListUsers = null;
     /**
      * Creates new form AddRWindow
      */
-    public AddRWindow() {
+    public AddRWindow(Recipe inRecipe) {
+		newRecipe = inRecipe;
+    	if (newRecipe == null)
+    		newRecipe = new Recipe();
+
+
         initComponents();
     }
 
@@ -26,17 +45,24 @@ public class AddRWindow extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
+    	ArrayList <Ingredient> ingrList = newRecipe.getIngredients();
+    	String [] ingrText= new String [ingrList.size()];
+        for (int i = 0; i < ingrList.size(); i++)
+        {
+        	ingrText [i] = ingrList.get(i).getAmount() + " " + ingrList.get(i).getConversion().returnHomeUnit() 
+        			+ " " +ingrList.get(i).getName();
+         }
+        RecipeName = newRecipe.getName();
         confirmButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         namePanel = new javax.swing.JPanel();
-        nameField = new javax.swing.JTextField();
+        nameField = new javax.swing.JTextField(RecipeName);
         instrPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         instrTextArea = new javax.swing.JTextArea();
         ingrPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        ingrList = new javax.swing.JList<>();
+        ingrDisplayList = new javax.swing.JList<>(ingrText);
         removeIngrButton = new javax.swing.JButton();
         favoritePanel = new javax.swing.JPanel();
         tagField = new javax.swing.JTextField();
@@ -95,8 +121,8 @@ public class AddRWindow extends javax.swing.JFrame {
 
         ingrPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Current Ingredients"));
 
-        ingrList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane2.setViewportView(ingrList);
+        ingrDisplayList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(ingrDisplayList);
 
         javax.swing.GroupLayout ingrPanelLayout = new javax.swing.GroupLayout(ingrPanel);
         ingrPanel.setLayout(ingrPanelLayout);
@@ -112,15 +138,15 @@ public class AddRWindow extends javax.swing.JFrame {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
         );
 
-        removeIngrButton.setText("Remove an Ingredient");
+        removeIngrButton.setText("Remove selected Ingredient");
         removeIngrButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeIngrButtonActionPerformed(evt);
+ //               removeIngrButtonActionPerformed(evt);
             }
         });
 
         favoritePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("(Optional) Enter people who like this recipe as comma separated list, first name and last name"));
-
+        
         tagField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tagFieldActionPerformed(evt);
@@ -133,23 +159,31 @@ public class AddRWindow extends javax.swing.JFrame {
             favoritePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(tagField)
         );
+        
+        
         favoritePanelLayout.setVerticalGroup(
-            favoritePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tagField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+                favoritePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(tagField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            );
 
-        addIngrButton1.setText("Add an Ingredient");
-        addIngrButton1.addActionListener(new java.awt.event.ActionListener() {
+            addIngrButton1.setText("Add an Ingredient");
+            addIngrButton1.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    addIngrButton1ActionPerformed(evt);
+                }
+            });
+
+            jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+            ratingSpinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 5, 1));
+
+            jLabel1.setText("Rate this Recipe(1-5): ");
+
+        tagField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addIngrButton1ActionPerformed(evt);
+                tagFieldActionPerformed(evt);
             }
         });
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-
-        ratingSpinner.setModel(new javax.swing.SpinnerNumberModel(1, null, 5, 1));
-
-        jLabel1.setText("Rate this Recipe(1-5): ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -186,7 +220,7 @@ public class AddRWindow extends javax.swing.JFrame {
             tagPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(tagField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -244,30 +278,74 @@ public class AddRWindow extends javax.swing.JFrame {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         this.dispose();
+        new FoodFinderRecipeWindow(null).setVisible(true);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
-    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-        
-        //insert code here
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        RecipeBook myBook = RecipeBook.getInstance();
+        newRecipe.setName(nameField.getText()); 
+        newRecipe.setInstructions(instrTextArea.getText());
+        Integer rating = (Integer) ratingSpinner.getValue(); 
+        if (rating > 0)
+        	newRecipe.setRating(rating);
+        myBook.addRecipe(newRecipe);
         
         this.dispose();
+        new FoodFinderRecipeWindow(null).setVisible(true);
+        
     }//GEN-LAST:event_confirmButtonActionPerformed
 
-    private void removeIngrButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeIngrButtonActionPerformed
-        
+    private void addTagButtonActionPerformed(java.awt.event.ActionEvent evt) 
+    {
+       tempListTags = new ArrayList <Tags>();
+    	String tagText = tagField1.getText();
+       int indexOfComma = 0;
+       indexOfComma = tagText.indexOf(',');
+       Tags tempTag = new Tags(tagText.substring(indexOfComma));
+       if (indexOfComma > 0)
+    	   tempTag.setType(tagText.substring(0,indexOfComma));
+    	tempListTags.add(tempTag);   
+    }
+    
+    private void addFavoriteButtonActionPerformed(java.awt.event.ActionEvent evt) 
+    {
+        tempListUsers = new ArrayList <User>();
+     	String tagText = tagField.getText();
+        int indexOfComma = 0;
+        indexOfComma = tagText.indexOf(','); 
+        User tempUser;
+        if (indexOfComma > 0)
+        {
+        	tempUser = new User(tagText.substring(indexOfComma),tagText.substring(0,indexOfComma));
+        	tempListUsers.add(tempUser);  
+        }
 
-    }//GEN-LAST:event_removeIngrButtonActionPerformed
+    }
+    
+    private void addIngrButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addIngrButtonActionPerformed
+        this.dispose();
+        newRecipe.setName(nameField.getText()); 
+    	new AddRIngredientWindow(newRecipe).setVisible(true);
+    }//GEN-LAST:event_addIngrButtonActionPerformed
 
     private void tagFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tagFieldActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
+        String tagText = tagField.getText();
+        int indexOfComma = tagText.indexOf(',');
+        Tags tempTag = new Tags(tagText.substring(indexOfComma));
+        if(indexOfComma > 0)
+        	tempTag.setType(tagText.substring(0,indexOfComma));
+        newRecipe.setName(nameField.getText()); 
+        new AddRTagsWindow(newRecipe).setVisible(true);
     }//GEN-LAST:event_tagFieldActionPerformed
-
-    private void addIngrButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addIngrButton1ActionPerformed
-        new AddRIngredientWindow().setVisible(true);
-    }//GEN-LAST:event_addIngrButton1ActionPerformed
-
+    
     private void tagField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tagField1ActionPerformed
-        // TODO add your handling code here:
+        String tagText = tagField.getText();
+        int indexOfComma = tagText.indexOf(',');
+        Tags tempTag = new Tags(tagText.substring(indexOfComma));
+        if(indexOfComma > 0)
+        	tempTag.setType(tagText.substring(0,indexOfComma));
+        newRecipe.setName(nameField.getText());
     }//GEN-LAST:event_tagField1ActionPerformed
 
     /**
@@ -300,7 +378,7 @@ public class AddRWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddRWindow().setVisible(true);
+                new AddRWindow(null).setVisible(true);
             }
         });
     }
@@ -310,7 +388,7 @@ public class AddRWindow extends javax.swing.JFrame {
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton confirmButton;
     private javax.swing.JPanel favoritePanel;
-    private javax.swing.JList<String> ingrList;
+    private javax.swing.JList<String> ingrDisplayList;
     private javax.swing.JPanel ingrPanel;
     private javax.swing.JPanel instrPanel;
     private javax.swing.JTextArea instrTextArea;
