@@ -58,6 +58,7 @@ package edu.ilstu;
 		{
 			this.ingredientName = nameIn;
 		}
+		
 
 		@Override
 		public boolean equals(Object ing){
