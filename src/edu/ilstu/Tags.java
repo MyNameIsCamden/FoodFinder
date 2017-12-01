@@ -10,9 +10,9 @@ public class Tags {
 		this.description = description; 
 	}
 	
-	public Tags(String tagType){
-		this.type = tagType;
-		this.description = null; 
+	public Tags(String tagDescription){
+		this.type = null;
+		this.description = tagDescription; 
 	}
 	
 	public String getType()	
@@ -30,7 +30,7 @@ public class Tags {
 		this.type = tagType;
 	}
 	
-	public void setDesc(String description){
+	public void setType(String description){
 		this.description = description;
 	}
 	
