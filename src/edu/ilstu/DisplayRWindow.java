@@ -1,5 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
+* To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -133,7 +132,7 @@ private String recName = "";
 
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         this.dispose();
-        new FoodFinderRecipeWindow().setVisible(true);
+        new FoodFinderRecipeWindow(null).setVisible(true);
     }//GEN-LAST:event_closeButtonActionPerformed
 
     private void recMadeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recMadeButtonActionPerformed
@@ -143,7 +142,7 @@ private String recName = "";
         JOptionPane.showMessageDialog(null, "Ingredients from pantry removed for recipe. " + "Check your pantry for the updated amounts" ,"Recipe Made", JOptionPane.INFORMATION_MESSAGE);
         
         this.dispose(); 
-        new FoodFinderRecipeWindow().setVisible(true);
+        new FoodFinderRecipeWindow(null).setVisible(true);
     }//GEN-LAST:event_recMadeButtonActionPerformed
 
     /**
