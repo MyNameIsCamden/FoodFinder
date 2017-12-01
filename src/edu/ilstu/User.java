@@ -21,8 +21,32 @@ public class User
 		this.lastName = lastName;
 	}
 	
+	public String getFirstName()
+	{
+		return this.firstName;
+	}
+	
+	public String getLastName()
+	{
+		return this.lastName;
+	}
+	
 	public String getName()
 	{
 		return firstName + " " + lastName;
+	}
+	@Override
+	public boolean equals(Object user){
+		boolean result = false;
+		
+	    if (user == null) result = false;
+	    else 
+	    	{ 
+	    	User tempUser = (User)user;
+	    	if (tempUser.getFirstName().equals(this.getFirstName()) &&
+	    			(tempUser.getLastName().equals(this.getLastName())))
+	    		result = true;
+	    	}
+	    return result;
 	}
 }
