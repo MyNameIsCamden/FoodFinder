@@ -52,20 +52,20 @@ public class RecipeBook
 		//Sort with different parameters
 	}
 
-	public boolean save()
+	public ArrayList<Recipe> findRecipesByUser (User tempUser)
 	{
-		return true;
-		//Need database info first
+		ArrayList<Recipe> tempList = new ArrayList<Recipe>();
+		for (int i = 0; i < recipeList.size(); i ++)
+		{
+	    	if(recipeList.get(i).getUser().contains(tempUser))
+	    	{
+	    		tempList.add(recipeList.get(i));
+	    	}
+		}
+		if (tempList == null)
+		{
+			//Recipe noRecipe = new Recipe ()
+		}
+		return tempList;
 	}
-
-	public void load()
-	{
-		//Need database info first
-	}
-
-	public void displayAllRecipes()
-	{
-		//Need UI info
-	}
-
 }
