@@ -1,5 +1,11 @@
 package edu.ilstu;
 
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.SwingUtilities;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,12 +17,14 @@ package edu.ilstu;
  * @author Katie
  */
 public class FoodFinderRecipeWindow extends javax.swing.JFrame {
-
+	private Recipe workingRecipe = null;
+	private ArrayList<Recipe> recipeList;
     /**
      * Creates new form FoodFinderRecipeWindow
      */
-    public FoodFinderRecipeWindow() {
+    public FoodFinderRecipeWindow(ArrayList<Recipe> inRecipes) {
         initComponents();
+        this.recipeList = inRecipes;
     }
 
     /**
@@ -26,14 +34,27 @@ public class FoodFinderRecipeWindow extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-
+    private void initComponents() 
+    {
+    	ArrayList <Recipe> recList;
+    	if (this.recipeList == null)
+    		{	
+    			RecipeBook myBook = RecipeBook.getInstance();
+    			recList = myBook.listRecipes();
+    		}
+    	else
+    		{recList = this.recipeList;}
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        for(int i =0; i < recList.size();i++)
+        {
+        	listModel.addElement(recList.get(i).getName());
+        }
         addButton = new javax.swing.JButton();
         displayButton = new javax.swing.JButton();
         goBackButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jList1 = new javax.swing.JList<>(listModel);
         jButton1 = new javax.swing.JButton();
         searchButton = new javax.swing.JButton();
 
@@ -126,11 +147,21 @@ public class FoodFinderRecipeWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        new AddRWindow().setVisible(true);
+        this.dispose();
+    	new AddRWindow(workingRecipe).setVisible(true);
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void displayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayButtonActionPerformed
-        new DisplayRWindow().setVisible(true);
+    	String selected = null;
+    	selected = jList1.getSelectedValue();
+    	if(selected != null)
+    	{
+    		Recipe tempRecipe = new Recipe(selected);
+    		RecipeBook myBook = RecipeBook.getInstance();
+    		workingRecipe = myBook.findRecipe(tempRecipe);
+    	}
+    	this.dispose();
+    	new DisplayRWindow(workingRecipe).setVisible(true);
     }//GEN-LAST:event_displayButtonActionPerformed
 
     private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
@@ -139,7 +170,8 @@ public class FoodFinderRecipeWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_goBackButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        new SearchRWindow().setVisible(true);
+        this.dispose();
+    	new SearchRWindow().setVisible(true);
     }//GEN-LAST:event_searchButtonActionPerformed
 
     /**
@@ -172,7 +204,7 @@ public class FoodFinderRecipeWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FoodFinderRecipeWindow().setVisible(true);
+                new FoodFinderRecipeWindow(null).setVisible(true);
             }
         });
     }
