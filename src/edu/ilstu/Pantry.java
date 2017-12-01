@@ -8,6 +8,7 @@ package edu.ilstu;
  */
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * @author Camden Coe
@@ -20,6 +21,18 @@ public class Pantry {
 	
 	private Pantry(){
 		ingredientList = new ArrayList<Ingredient>();
+		Ingredient ing1 = new Ingredient("Flour","pounds","cups",10.0,4.0);
+		Ingredient ing2 = new Ingredient("Sugar","pounds","cups",10.0,2.0);
+		Ingredient ing3 = new Ingredient("Brown Sugar","pounds","cups",10.0,2.3);
+		Ingredient ing4 = new Ingredient("Powdered Sugar","pounds","cups",10.0,3.75);
+		Ingredient ing5 = new Ingredient("Milk","gallons","cups",1.0,16.0);
+		Ingredient ing6 = new Ingredient("Butter","sticks","cups",4.0,.5);
+		ingredientList.add(ing1);
+		ingredientList.add(ing2);
+		ingredientList.add(ing3);
+		ingredientList.add(ing4);
+		ingredientList.add(ing5);
+		ingredientList.add(ing6);
 	}
 	
 	public static Pantry getInstance()
@@ -39,7 +52,14 @@ public class Pantry {
 
 	public void deleteIngredient(Ingredient ing){
 		ingredientList.remove(ing);
-		System.out.println(ing.getName() + " has been deleted.");
+	}
+	
+	public Ingredient findIngredient (Ingredient ing){
+		Ingredient tempIng = null;
+		if (ingredientList.contains(ing)) {
+			   tempIng = ingredientList.get(ingredientList.indexOf(ing));
+			}
+		return tempIng;
 	}
 	
 	public Ingredient searchIngredient(Ingredient ing){
