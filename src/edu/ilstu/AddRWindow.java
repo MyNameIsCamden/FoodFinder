@@ -415,6 +415,8 @@ public class AddRWindow extends javax.swing.JFrame {
     private javax.swing.JPanel namePanel;
     private javax.swing.JSpinner ratingSpinner;
     private javax.swing.JButton removeIngrButton;
+    private javax.swing.JCheckBox stockCheckbox;
+    private javax.swing.JLabel stockLabel;
     private javax.swing.JTextField tagField;
     private javax.swing.JTextField tagField1;
     private javax.swing.JPanel tagPanel1;
