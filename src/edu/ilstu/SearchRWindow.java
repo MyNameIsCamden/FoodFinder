@@ -30,6 +30,8 @@ public class SearchRWindow extends javax.swing.JFrame {
         searchTypeCombo = new javax.swing.JComboBox<>();
         searchChoiceLabel = new javax.swing.JLabel();
         seachField = new javax.swing.JTextField();
+        rankLabel = new javax.swing.JLabel();
+        rankCheckbox = new javax.swing.JCheckBox();
         cancelButton = new javax.swing.JButton();
         confirmButton = new javax.swing.JButton();
 
@@ -38,6 +40,14 @@ public class SearchRWindow extends javax.swing.JFrame {
         searchTypeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Recipe Name", "Favorites for one person", "Rating" }));
 
         searchChoiceLabel.setText("Search based on:");
+        
+        rankLabel.setText("Sort by ranking:");
+        
+        rankCheckbox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rankCheckboxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -118,6 +128,10 @@ public class SearchRWindow extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_confirmButtonActionPerformed
 
+    private void rankCheckboxActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+    } 
+    
     /**
      * @param args the command line arguments
      */
@@ -157,6 +171,8 @@ public class SearchRWindow extends javax.swing.JFrame {
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton confirmButton;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JCheckBox rankCheckbox;
+    private javax.swing.JLabel rankLabel;
     private javax.swing.JTextField seachField;
     private javax.swing.JLabel searchChoiceLabel;
     private javax.swing.JComboBox<String> searchTypeCombo;
