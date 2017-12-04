@@ -1,4 +1,5 @@
-* To change this license header, choose License Headers in Project Properties.
+/*
+ * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -32,28 +33,34 @@ private String recName = "";
     private void initComponents() {
     	if (tempRecipe != null)
     		recName = tempRecipe.getName();
-        closeButton = new javax.swing.JButton();
-        ingrPanel = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        ingrTextPane = new javax.swing.JTextPane();
-        instrPanel = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        instrTextPane = new javax.swing.JTextPane();
-        recMadeButton = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        tagTextPane = new javax.swing.JTextPane();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        favTextPane = new javax.swing.JTextPane();
-        
+    	 closeButton = new javax.swing.JButton();
+         ingrPanel = new javax.swing.JPanel();
+         jScrollPane3 = new javax.swing.JScrollPane();
+         ingrTextPane = new javax.swing.JTextPane();
+         instrPanel = new javax.swing.JPanel();
+         jScrollPane5 = new javax.swing.JScrollPane();
+         instrTextPane = new javax.swing.JTextPane();
+         recMadeButton = new javax.swing.JButton();
+         jPanel1 = new javax.swing.JPanel();
+         jScrollPane6 = new javax.swing.JScrollPane();
+         tagTextPane = new javax.swing.JTextPane();
+         jPanel2 = new javax.swing.JPanel();
+         jScrollPane7 = new javax.swing.JScrollPane();
+         favTextPane = new javax.swing.JTextPane();
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle(recName);
         closeButton.setText("Close");
         if(tempRecipe != null)
         {
+          if (tempRecipe.getRating() > 0)
+          {
+        	  instrTextPane.setText("Rating: " + tempRecipe.displayRating() + tempRecipe.displayInstructions());  
+          }
+          else
           instrTextPane.setText(tempRecipe.displayInstructions());
           ingrTextPane.setText(tempRecipe.displayIngredients());
+          tagTextPane.setText(tempRecipe.displayTags());
+          favTextPane.setText(tempRecipe.displayUsers());
         }
         closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,7 +79,7 @@ private String recName = "";
         ingrPanel.setLayout(ingrPanelLayout);
         ingrPanelLayout.setHorizontalGroup(
             ingrPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
         );
         ingrPanelLayout.setVerticalGroup(
             ingrPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,12 +110,12 @@ private String recName = "";
                 recMadeButtonActionPerformed(evt);
             }
         });
-    
+
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Tags"));
 
         tagTextPane.setOpaque(false);
         jScrollPane6.setViewportView(tagTextPane);
-
+        
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -120,7 +127,7 @@ private String recName = "";
             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Favorites"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Lovers of this recipe"));
 
         favTextPane.setOpaque(false);
         jScrollPane7.setViewportView(favTextPane);
@@ -136,8 +143,7 @@ private String recName = "";
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-        );
-        
+        );     
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -196,7 +202,7 @@ private String recName = "";
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void mainTemp(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -243,5 +249,4 @@ private String recName = "";
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JButton recMadeButton;
     private javax.swing.JTextPane tagTextPane;
-    // End of variables declaration//GEN-END:variables
 }
