@@ -23,9 +23,9 @@ public class FoodFinderRecipeWindow extends javax.swing.JFrame {
      * Creates new form FoodFinderRecipeWindow
      */
     public FoodFinderRecipeWindow(ArrayList<Recipe> inRecipes) {
+    	this.recipeList = inRecipes;
         initComponents();
-        this.recipeList = inRecipes;
-    }
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,6 +47,7 @@ public class FoodFinderRecipeWindow extends javax.swing.JFrame {
         DefaultListModel<String> listModel = new DefaultListModel<>();
         for(int i =0; i < recList.size();i++)
         {
+        	
         	listModel.addElement(recList.get(i).getName());
         }
         addButton = new javax.swing.JButton();
@@ -99,7 +100,13 @@ public class FoodFinderRecipeWindow extends javax.swing.JFrame {
         );
 
         jButton1.setText("Remove a Recipe");
-
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeButtonActionPerformed(evt);
+            }
+        });
+        
+        
         searchButton.setText("Search for a Recipe");
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,6 +170,21 @@ public class FoodFinderRecipeWindow extends javax.swing.JFrame {
     	this.dispose();
     	new DisplayRWindow(workingRecipe).setVisible(true);
     }//GEN-LAST:event_displayButtonActionPerformed
+    
+    private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayButtonActionPerformed
+    	String selected = null;
+    	selected = jList1.getSelectedValue();
+    	if(selected != null)
+    	{
+    		Recipe tempRecipe = new Recipe(selected);
+    		RecipeBook myBook = RecipeBook.getInstance();
+    		workingRecipe = myBook.findRecipe(tempRecipe);
+        	myBook.deleteRecipe(workingRecipe);
+    	}
+
+    	this.dispose();
+    	new FoodFinderRecipeWindow(null).setVisible(true);
+    }//GEN-LAST:event_displayButtonActionPerformed
 
     private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
         this.dispose();
@@ -177,7 +199,7 @@ public class FoodFinderRecipeWindow extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void mainTemp(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
