@@ -1,15 +1,17 @@
-* To change this license header, choose License Headers in Project Properties.
+/*
+ * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package edu.ilstu;
 
+import java.util.ArrayList;
 /**
  *
  * @author Katie
  */
 public class SearchRWindow extends javax.swing.JFrame {
-
+	private ArrayList<Recipe> tempRecipeList;
     /**
      * Creates new form SearchRWindow
      */
@@ -37,7 +39,7 @@ public class SearchRWindow extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        searchTypeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Recipe Name", "Favorites for one person", "Rating" }));
+        searchTypeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Favorites for one person", "Ingredients currently in the pantry", "Recipe name", "Tag descriptions" }));
 
         searchChoiceLabel.setText("Search based on:");
         
@@ -132,10 +134,49 @@ public class SearchRWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-
-        //code code code code code
-
+		RecipeBook myBook = RecipeBook.getInstance();
+		tempRecipeList = null;
+    	
+    	String selectedSearch = (String) searchTypeCombo.getSelectedItem();
+        switch(selectedSearch){
+        case "Favorites for one person":
+        	{
+        		String searchText = seachField.getText();
+            	if (searchText != null)
+            	{
+            		int indexOfSpace = 0;
+            		indexOfSpace = searchText.indexOf(' ');
+            		User tempUser = new User(searchText.substring(indexOfSpace + 1), searchText.substring(0,indexOfSpace));
+            		tempRecipeList = myBook.findRecipesByUser(tempUser);
+            	}
+        	}
+        case "Ingredients currently in the pantry":
+        	{
+        		ArrayList <Ingredient> tempIngList;
+        		Pantry myPantry = Pantry.getInstance();
+        		tempIngList = myPantry.listIngredients();
+        		for(int i = 0; i < tempIngList.size(); i++){
+        			Ingredient ing = tempIngList.get(i);
+        		}	
+        	}     
+        case "Recipe name":
+    		{
+    	
+    		}   
+        case "Tag descriptions":
+    		{
+    	
+    		}     
+        default: System.out.println("Invalid selection");
+        if (tempRecipeList == null)
+        	{
+        		Recipe tempRecipe = new Recipe("No recipes meet the search criteria");
+        		tempRecipeList.add(tempRecipe);
+        	}
         this.dispose();
+        new FoodFinderRecipeWindow(tempRecipeList).setVisible(true);	
+        }
+        
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void rankCheckboxActionPerformed(java.awt.event.ActionEvent evt) {                                             
@@ -145,7 +186,7 @@ public class SearchRWindow extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void mainTemp(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
