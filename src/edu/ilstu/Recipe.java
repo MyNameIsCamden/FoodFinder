@@ -195,11 +195,12 @@ public class Recipe implements Comparable<Recipe>  {
 	   */ 
 	  public int compareTo(Recipe rec){ 
 		int result = 0;
-		if (this.rating < rec.rating)
+		if (this.rating > rec.rating)
 			result = -1;
-			else if (this.rating > rec.rating)	
+			else if (this.rating < rec.rating)	
 				result = 1;
 	    return result;   
 	  }
 	
 }
+
