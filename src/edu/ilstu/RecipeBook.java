@@ -15,8 +15,8 @@ public class RecipeBook
 		Ingredient tempIngredient2 = new Ingredient ("Butter", null, "cups", 1.0, 1.0);
 		Ingredient tempIngredient3 = new Ingredient ("Brown sugar", null, "cups", 1.0, 1.0);
 		Ingredient tempIngredient4 = new Ingredient ("Baking soda", null, "teaspoon", 0.5, 1.0);
-		Ingredient tempIngredient5 = new Ingredient ("Vanilla Extract", null, "teaspoon", 2.0, 1.0);
-		Ingredient tempIngredient6 = new Ingredient ("Chocolate Chips", null, "cups", 2.0, 1.0);
+		Ingredient tempIngredient5 = new Ingredient ("Vanilla extract", null, "teaspoon", 2.0, 1.0);
+		Ingredient tempIngredient6 = new Ingredient ("Chocolate chips", null, "cups", 2.0, 1.0);
 		Ingredient tempIngredient7 = new Ingredient ("Sugar", null, "cups", 0.5, 1.0);
 		Ingredient tempIngredient8 = new Ingredient ("Salt", null, "teaspoon", 2.0, 1.0);
 		Ingredient tempIngredient9 = new Ingredient ("Eggs", null, "", 2.0, 1.0);
@@ -55,8 +55,8 @@ public class RecipeBook
 		Ingredient temp2Ingredient4 = new Ingredient ("Salt", null, "teaspoon", 2.0, 1.0);
 		Ingredient temp2Ingredient5 = new Ingredient ("Nutmeg", null, "teaspoon", .25, 1.0);
 		Ingredient temp2Ingredient6 = new Ingredient ("Pepper", null, "teaspoon", .25, 1.0);
-		Ingredient temp2Ingredient7 = new Ingredient ("Cheddar Cheese", null, "cups", 4.5, 1.0);
-		Ingredient temp2Ingredient8 = new Ingredient ("Romano Cheese", null, "cups", 1.25, 1.0);
+		Ingredient temp2Ingredient7 = new Ingredient ("Cheddar cheese", null, "cups", 4.5, 1.0);
+		Ingredient temp2Ingredient8 = new Ingredient ("Romano cheese", null, "cups", 1.25, 1.0);
 		Ingredient temp2Ingredient9 = new Ingredient ("Macaroni", null, "cups", 0.5, 1.0);
 		demoRecipe2.addIngredient(temp2Ingredient1);
 		demoRecipe2.addIngredient(temp2Ingredient2);
@@ -95,12 +95,12 @@ public class RecipeBook
 	Ingredient temp3Ingredient1 = new Ingredient ("Butter", null, "cups", 0.5, 1.0);
 	Ingredient temp3Ingredient2 = new Ingredient ("Eggs", null, "", 2.0, 1.0);
 	Ingredient temp3Ingredient3 = new Ingredient ("Baking soda", null, "teaspoon", 1.0, 1.0);
-	Ingredient temp3Ingredient4 = new Ingredient ("Mashed Bananas", null, "cups", 1.0, 1.0);
-	Ingredient temp3Ingredient5 = new Ingredient ("Vanilla Extract", null, "teaspoon", 2.0, 1.0);
+	Ingredient temp3Ingredient4 = new Ingredient ("Mashed bananas", null, "cups", 1.0, 1.0);
+	Ingredient temp3Ingredient5 = new Ingredient ("Vanilla extract", null, "teaspoon", 2.0, 1.0);
 	Ingredient temp3Ingredient6 = new Ingredient ("Sugar", null, "cups", 1.0, 1.0);
 	Ingredient temp3Ingredient7 = new Ingredient ("Flour", null, "cups", 1.5, 1.0);
 	Ingredient temp3Ingredient8 = new Ingredient ("Salt", null, "teaspoon", 1.0, 1.0);
-	Ingredient temp3Ingredient9 = new Ingredient ("Sour Cream", null, "cups", 0.5, 1.0);
+	Ingredient temp3Ingredient9 = new Ingredient ("Sour cream", null, "cups", 0.5, 1.0);
 	Ingredient temp3Ingredient10 = new Ingredient ("Walnuts", null, "cups", 0.5, 1.0);
 	demoRecipe3.addIngredient(temp3Ingredient1);
 	demoRecipe3.addIngredient(temp3Ingredient2);
@@ -154,7 +154,7 @@ public class RecipeBook
 			"Heat a large skillet over medium heat. Fold paper towel in half, and moisten with oil; carefully rub the skillet with the oiled paper towel. \n" +
 			"For each pancake, spoon 2 to 3 tablespoons of batter onto the skillet, using the back of a spoon to spread the batter into a round shape.  \n" +
 			"Cook until the surface of pancakes have some bubbles, and some have burst. Flip carefully with a thin spatula, and cook until brown on the underside, 1 to 2 minutes more. Serve warm with desired toppings \n");
-	demoRecipe1.setRating(3);
+	demoRecipe4.setRating(3);
 	ArrayList<Tags> temp4ListTags = new ArrayList <Tags>();
 	Tags temp4Tags1 = new Tags("Preparation","easy");
 	Tags temp4Tags2 = new Tags("Preparation","under 30 minutes");
@@ -243,4 +243,5 @@ public class RecipeBook
 		return tempList;
 	}
 }
+
 
