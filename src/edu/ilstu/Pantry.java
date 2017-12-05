@@ -30,6 +30,8 @@ public class Pantry {
 		Ingredient ing7 = new Ingredient("Baking soda","ounces","teaspoons",3,6.75);
 		Ingredient ing8 = new Ingredient("Vanilla extract","ounces","teaspoons",1,6.75);
 		Ingredient ing9 = new Ingredient("Chocolate chips","pounds","cups",1,3.0);
+		Ingredient ing10 = new Ingredient("Salt","ounces","teaspoons",1,5);
+		Ingredient ing11 = new Ingredient("Eggs","dozen","",1,12);
 		ingredientList.add(ing1);
 		ingredientList.add(ing2);
 		ingredientList.add(ing3);
@@ -39,6 +41,8 @@ public class Pantry {
 		ingredientList.add(ing7);
 		ingredientList.add(ing8);
 		ingredientList.add(ing9);
+		ingredientList.add(ing10);
+		ingredientList.add(ing11);
 	}
 	
 	public static Pantry getInstance()
