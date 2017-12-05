@@ -1,52 +1,60 @@
 package edu.ilstu;
 
-public class User
-{
-	private String firstName;
-	private String lastName;
+public class Tags {
+	private String type;
+	private String description;
+
 	
-	User(String firstName, String lastName)
-	{
-		this.firstName = firstName;
-		this.lastName = lastName;
+	public Tags(String type, String description){
+		this.type = type;
+		this.description = description; 
 	}
 	
-	public void setFirstName(String firstName)
-	{
-		this.firstName = firstName;
+	public Tags(String tagDescription){
+		this.type = null;
+		this.description = tagDescription; 
 	}
 	
-	public void setLastName(String lastName)
+	public String getType()	
 	{
-		this.lastName = lastName;
+		return this.type;
 	}
 	
-	public String getFirstName()
+	public String getDesc()	
 	{
-		return this.firstName;
+		return this.description;
 	}
 	
-	public String getLastName()
-	{
-		return this.lastName;
+	
+	public void addType(String tagType){
+		this.type = tagType;
 	}
 	
-	public String getName()
-	{
-		return firstName + " " + lastName;
+	public void setDescription(String description){
+		this.description = description;
 	}
-	@Override
-	public boolean equals(Object user){
+	
+	public String displayTag (){
+		String str = (this.type) + ": " + (this.description);
+		return str;
+	}
+	
+	public void removeTag()
+	{
+		this.type = null;
+		this.description = null;
+	}
+	
+	public boolean equals(Tags inTag) {
 		boolean result = false;
-		
-	    if (user == null) result = false;
+	    if (inTag == null) result = false;
 	    else 
-	    	{ 
-	    	User tempUser = (User)user;
-	    	if (tempUser.getFirstName().equals(this.getFirstName()) &&
-	    			(tempUser.getLastName().equals(this.getLastName())))
-	    		result = true;
-	    	}
+	    	if (inTag.getType() == this.getType())
+	    	result = true;
 	    return result;
 	}
+
+	
+	
+	
 }
