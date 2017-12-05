@@ -1,7 +1,6 @@
 package edu.ilstu;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * This class holds all the information for a recipe.
@@ -10,14 +9,15 @@ import java.util.List;
  * @author Heather Trausch
  *
  */
-public class Recipe {
+public class Recipe implements Comparable<Recipe>  {
 	
 	private String name;
 	private String instructions;
-	private int rating;
+	private int rating = 0;
 	private ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
 	private ArrayList<User> users = new ArrayList<User>();
 	private ArrayList<Tags> tags = new ArrayList<Tags>();
+	private boolean alwaysStock;
 	
  	public Recipe()
 	{
@@ -44,7 +44,14 @@ public class Recipe {
 	 * @return the ratings
 	 */
 	public String displayRating(){
-		return Integer.toString(rating);
+		String rateString = "";
+		for (int i=0;i<this.rating;i++)
+		{
+			rateString = rateString + " *";
+		}
+		
+		rateString = rateString + "\n" + "\n";
+		return rateString;
 	}
 	
 	/**
@@ -98,6 +105,14 @@ public class Recipe {
 	// Getters and setters for all instance variables
 	public void setInstructions(String instructions){
 		this.instructions = instructions;
+	}
+	
+	public void setStock(boolean stock){
+		this.alwaysStock = stock;
+	}
+	
+	public boolean checkStock(){
+		return this.alwaysStock;
 	}
 	
 	public void setName(String name){
@@ -171,6 +186,20 @@ public class Recipe {
 	    		result = true;
 	    	}
 	    return result;
-	}	
+	}
+	  @Override 
+	  /* 
+	   * When we only use Comparable, this is where we write sorting
+	   * logic. This method is called when we implement the Comparable
+	   * interface in our class and call Collections.sort()
+	   */ 
+	  public int compareTo(Recipe rec){ 
+		int result = 0;
+		if (this.rating < rec.rating)
+			result = -1;
+			else if (this.rating > rec.rating)	
+				result = 1;
+	    return result;   
+	  }
 	
 }
