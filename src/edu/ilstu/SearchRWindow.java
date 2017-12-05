@@ -6,6 +6,7 @@
 package edu.ilstu;
 
 import java.util.ArrayList;
+
 /**
  *
  * @author Katie
@@ -136,69 +137,117 @@ public class SearchRWindow extends javax.swing.JFrame {
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
 		RecipeBook myBook = RecipeBook.getInstance();
 		tempRecipeList = null;
-    	
-    	String selectedSearch = (String) searchTypeCombo.getSelectedItem();
-        switch(selectedSearch){
-        case "Favorites for one person":
-        	{
-        		String searchText = seachField.getText();
-            	if (searchText != null)
-            	{
-            		int indexOfSpace = 0;
-            		indexOfSpace = searchText.indexOf(' ');
-            		User tempUser = new User(searchText.substring(indexOfSpace + 1), searchText.substring(0,indexOfSpace));
-            		tempRecipeList = myBook.findRecipesByUser(tempUser);
-            	}
-        	}
-        case "Ingredients currently in the pantry":
-        	{
-        		ArrayList <Ingredient> tempIngList;
-        		Pantry myPantry = Pantry.getInstance();
-        		tempIngList = myPantry.listIngredients();
-        		for(int i = 0; i < tempIngList.size(); i++){
-        			Ingredient ing = tempIngList.get(i);
-        		}	
-        	}     
-        case "Recipe name":
-    		{
-    	
-    		}   
-        case "Tag descriptions":
-    		{
-    	
-    		}     
-        default: System.out.println("Invalid selection");
-        if (tempRecipeList == null)
-        	{
-        		Recipe tempRecipe = new Recipe("No recipes meet the search criteria");
-        		tempRecipeList.add(tempRecipe);
-        	}
-        this.dispose();
-        new FoodFinderRecipeWindow(tempRecipeList).setVisible(true);	
-        }
-        
+
+		String selectedSearch = (String) searchTypeCombo.getSelectedItem();
+		switch(selectedSearch){
+		case "Favorites for one person":
+		{
+			String searchText = seachField.getText();
+			if (searchText != null)
+			{
+				int indexOfSpace = 0;
+				indexOfSpace = searchText.indexOf(' ');
+				if(indexOfSpace > 0)
+				{
+					User tempUser = new User(searchText.substring(indexOfSpace + 1), searchText.substring(0,indexOfSpace));
+					tempRecipeList = myBook.findRecipesByUser(tempUser);
+				}
+			}
+		}
+		case "Ingredients currently in the pantry":
+		{
+			tempRecipeList = new ArrayList <Recipe>();
+			Pantry myPantry = Pantry.getInstance();
+			myBook = RecipeBook.getInstance();
+			for(int i = 0; i < myBook.listRecipes().size(); i++)
+			{
+				boolean add_recipe = true;
+				for(int j = 0; j < myBook.listRecipes().get(i).getIngredients().size(); j++)
+					if (! myPantry.listIngredients().contains(myBook.listRecipes().get(i).getIngredients().get(j)))
+					{
+						add_recipe = false;
+					}
+				if(add_recipe)
+					tempRecipeList.add(myBook.listRecipes().get(i));
+			}
+		}     
+		case "Recipe name":
+		{
+			tempRecipeList = new ArrayList <Recipe>();
+			String findMe = seachField.getText();
+			myBook = RecipeBook.getInstance();
+			for(int j = 0; j < myBook.listRecipes().size(); j++)
+			{
+				String searchMe =  myBook.listRecipes().get(j).getName();
+				int searchMeLength = searchMe.length();
+				int findMeLength = findMe.length();
+				boolean foundIt = false;
+				for (int i = 0; 
+						i <= (searchMeLength - findMeLength);
+						i++) {
+					if (searchMe.regionMatches(i, findMe, 0, findMeLength)) {
+						foundIt = true;
+					}
+				}
+				if(foundIt)
+					tempRecipeList.add(myBook.listRecipes().get(j));
+			}
+
+		}   
+		case "Tag descriptions":
+		{
+			tempRecipeList = new ArrayList <Recipe>();
+			String findMe = seachField.getText();
+			myBook = RecipeBook.getInstance();
+			for(int j = 0; j < myBook.listRecipes().size(); j++)
+			{
+				boolean foundIt = false;
+				for(int k = 0; k < myBook.listRecipes().get(j).getTags().size(); k++)
+				{
+					String searchMe =  myBook.listRecipes().get(j).getTags().get(k).getDesc();
+					int searchMeLength = searchMe.length();
+					int findMeLength = findMe.length();
+					for (int i = 0; 
+							i <= (searchMeLength - findMeLength);
+							i++) {
+						if (searchMe.regionMatches(i, findMe, 0, findMeLength)) {
+							foundIt = true;
+						}
+					}
+					if((foundIt) && !(tempRecipeList.contains(myBook.listRecipes().get(j))))
+						tempRecipeList.add(myBook.listRecipes().get(j));
+				}
+			}
+		}   
+		default: System.out.println("Invalid selection");
+		/*if (rankCheckbox.isSelected())
+			Collections.sort(tempRecipeList);*/
+		this.dispose();
+		new FoodFinderRecipeWindow(tempRecipeList).setVisible(true);	
+		}
+
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void rankCheckboxActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        // TODO add your handling code here:
+    	// TODO add your handling code here:
     } 
-    
+
     /**
      * @param args the command line arguments
      */
     public static void mainTemp(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
+    	/* Set the Nimbus look and feel */
+    	//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    	/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    	 * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+    	 */
+    	try {
+    		for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+    			if ("Nimbus".equals(info.getName())) {
+    				javax.swing.UIManager.setLookAndFeel(info.getClassName());
+    				break;
+    			}
+    		}
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(SearchRWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
