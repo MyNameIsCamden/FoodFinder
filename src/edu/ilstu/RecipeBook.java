@@ -235,10 +235,12 @@ public class RecipeBook
 	    		tempList.add(recipeList.get(i));
 	    	}
 		}
-		if (tempList == null)
+		if (tempList.size() == 0)
 		{
-			//Recipe noRecipe = new Recipe ()
+			Recipe noRecipe = new Recipe ("No results found");
+			tempList.add(noRecipe);
 		}
 		return tempList;
 	}
 }
+
