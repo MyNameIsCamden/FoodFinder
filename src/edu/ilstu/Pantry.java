@@ -23,16 +23,22 @@ public class Pantry {
 		ingredientList = new ArrayList<Ingredient>();
 		Ingredient ing1 = new Ingredient("Flour","pounds","cups",10.0,4.0);
 		Ingredient ing2 = new Ingredient("Sugar","pounds","cups",10.0,2.0);
-		Ingredient ing3 = new Ingredient("Brown Sugar","pounds","cups",10.0,2.3);
-		Ingredient ing4 = new Ingredient("Powdered Sugar","pounds","cups",10.0,3.75);
+		Ingredient ing3 = new Ingredient("Brown sugar","pounds","cups",10.0,2.3);
+		Ingredient ing4 = new Ingredient("Powdered sugar","pounds","cups",10.0,3.75);
 		Ingredient ing5 = new Ingredient("Milk","gallons","cups",1.0,16.0);
 		Ingredient ing6 = new Ingredient("Butter","sticks","cups",4.0,.5);
+		Ingredient ing7 = new Ingredient("Baking soda","ounces","teaspoons",3,6.75);
+		Ingredient ing8 = new Ingredient("Vanilla extract","ounces","teaspoons",1,6.75);
+		Ingredient ing9 = new Ingredient("Chocolate chips","pounds","cups",1,3.0);
 		ingredientList.add(ing1);
 		ingredientList.add(ing2);
 		ingredientList.add(ing3);
 		ingredientList.add(ing4);
 		ingredientList.add(ing5);
 		ingredientList.add(ing6);
+		ingredientList.add(ing7);
+		ingredientList.add(ing8);
+		ingredientList.add(ing9);
 	}
 	
 	public static Pantry getInstance()
