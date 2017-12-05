@@ -30,7 +30,7 @@ public class Tags {
 		this.type = tagType;
 	}
 	
-	public void setType(String description){
+	public void setDescription(String description){
 		this.description = description;
 	}
 	
